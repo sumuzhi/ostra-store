@@ -9,7 +9,7 @@
 | 在线地址（主） | https://ostra-store.app.workbuddy.host/ |
 | 在线地址（Vercel） | https://ostra-store.vercel.app |
 | 代码仓库 | https://github.com/sumuzhi/ostra-store |
-| 当前版本 | v1.0.0（commit `091a88e`） |
+| 当前版本 | v1.0.0（commit `e144894`） |
 | 交付文档 | [DELIVERY.md](./DELIVERY.md)（功能范围、设计系统、验收记录） |
 
 ---
