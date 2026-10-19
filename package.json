@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5180 --strictPort",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender-shells.mjs",
     "preview": "vite preview --port 5180 --strictPort"
   },
   "dependencies": {
