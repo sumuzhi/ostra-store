@@ -11,7 +11,8 @@ import markdown
 ROOT = pathlib.Path('/Users/sumuzhi/WorkBuddy/2026-10-19-14-44-12')
 md_path = ROOT / 'DELIVERY.md'
 out_html = ROOT / 'build' / 'delivery.html'
-out_html.parent.mkdir(exist_ok=True)
+if not out_html.parent.is_dir():
+    out_html.parent.mkdir(parents=True)
 
 text = md_path.read_text(encoding='utf-8')
 

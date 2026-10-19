@@ -6,7 +6,7 @@
 | 产物形态 | 面向海外消费者的商品选购 Web 应用（React 单页应用） |
 | 交付版本 | v1.0.0（commit `446755f`） |
 | 交付日期 | 2026-10-19 |
-| 在线地址 | https://ostra-store.app.workbuddy.host/ |
+| 在线地址 | 主站 https://ostra-store.app.workbuddy.host/ ｜ Vercel 镜像 https://ostra-store.vercel.app |
 | 代码仓库 | https://github.com/sumuzhi/ostra-store |
 | 文档范围 | 功能范围、技术方案、设计系统、部署运维、验收记录、已知限制 |
 
@@ -37,7 +37,7 @@ Ostra 是一个**小批量家居器物品牌**的直营店。交付物的目标�
 
 | # | 交付物 | 位置 | 说明 |
 | --- | --- | --- | --- |
-| 1 | 在线可访问站点 | https://ostra-store.app.workbuddy.host/ | 已发布并验证，可直接发给客户 |
+| 1 | 在线可访问站点 | 主站 https://ostra-store.app.workbuddy.host/ ｜ Vercel https://ostra-store.vercel.app | 两处均已发布并验证，可直接发给客户 |
 | 2 | 源代码仓库 | https://github.com/sumuzhi/ostra-store | public，默认分支 `main`，44 个受版本控制文件 |
 | 3 | 本地工程 | `/Users/sumuzhi/WorkBuddy/2026-10-19-14-44-12` | 可直接 `npm install && npm run dev` |
 | 4 | 生产构建产物 | `dist/`（2.9 MB） | 含 13 条路由外壳，可直接托管于任意静态服务器 |
@@ -301,6 +301,8 @@ slug 由 `scripts/prerender-shells.mjs` 从 `src/data/products.js` 正则抽取�
 | 4 | 验收：依次访问 `/`、`/shop`、`/product/terra-mug`，确认 200 且内容正确 |
 
 线上链接固定为 https://ostra-store.app.workbuddy.host/ ，重复发布覆盖同一应用，链接不变。
+
+**Vercel 镜像**：项目 `ostra-store` 已绑定 GitHub 仓库，向 `main` 推送即自动构建发布，生产别名固定为 https://ostra-store.vercel.app （配置见仓库根目录 `vercel.json`；注意 Vercel 新建项目会默认开启 Deployment Protection，需关闭后链接才能对外访问）。
 
 ### 6.5 可用脚本
 

@@ -2,8 +2,6 @@
 
 面向海外消费者的家居器物选购 Web 应用（React 单页应用）。收录 12 件商品、5 个分类，覆盖「浏览 → 筛选 → 查看细节 → 加入购物袋 → 三步结算 → 订单确认」完整链路，桌面与手机双端适配。
 
-![Ostra storefront](./public/img/corner.jpg)
-
 | 项 | 值 |
 | --- | --- |
 | 在线地址（主） | https://ostra-store.app.workbuddy.host/ |
