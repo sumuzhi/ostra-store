@@ -6,9 +6,10 @@
 
 | 项 | 值 |
 | --- | --- |
-| 在线地址 | https://ostra-store.app.workbuddy.host/ |
+| 在线地址（主） | https://ostra-store.app.workbuddy.host/ |
+| 在线地址（Vercel） | https://ostra-store.vercel.app |
 | 代码仓库 | https://github.com/sumuzhi/ostra-store |
-| 当前版本 | v1.0.0（commit `446755f`） |
+| 当前版本 | v1.0.0（commit `091a88e`） |
 | 交付文档 | [DELIVERY.md](./DELIVERY.md)（功能范围、设计系统、验收记录） |
 
 ---
@@ -159,12 +160,35 @@ dist/
 
 | 平台 | 要点 |
 | --- | --- |
-| 当前托管（WorkBuddy Sites） | 发布目录指向 `dist`，入口 `index.html` |
-| Netlify / Vercel | Build command `npm run build`，output `dist`；也可去掉外壳脚本改用平台 rewrite |
+| WorkBuddy Sites（主） | 发布目录指向 `dist`，入口 `index.html`；无 rewrite，依赖路由外壳 |
+| Vercel（镜像，已上线） | 已连接 GitHub 仓库，push 到 `main` 即自动构建；`vercel.json` 提供 SPA 回退与缓存头 |
+| Netlify | Build command `npm run build`，output `dist`；建议同样配置 SPA 回退 |
 | Nginx / Apache | 根目录指向 `dist`；或配置 `try_files $uri $uri/ /index.html` 后无需外壳 |
 | GitHub Pages | 需在 `vite.config.js` 增加 `base: '/<repo>/'`，否则资源路径 404 |
 
 > 若部署在**子路径**（如 `example.com/store/`），必须设置 `base`，否则 `/assets/...` 与 `/img/...` 都会失效。
+
+### 6.4 Vercel 部署（当前生产环境）
+
+项目 `ostra-store`（team `sumuzhi's projects`，Hobby）已绑定 GitHub 仓库 `sumuzhi/ostra-store`，两种发布方式：
+
+| 方式 | 操作 |
+| --- | --- |
+| 自动（推荐） | 推送到 `main` 分支，Vercel 自动构建并发布生产版本 |
+| 手动 | `npx vercel --prod`（或已全局安装的 `vercel --prod`）；首次需 `vercel login` 与 `vercel link` |
+
+`vercel.json` 只做三件事，与本地构建互不冲突：
+
+| 配置 | 作用 |
+| --- | --- |
+| `installCommand: npm ci` / `buildCommand: npm run build` / `outputDirectory: dist` | 显式声明构建方式，避免依赖平台自动探测 |
+| `rewrites` | 除 `assets/`、`img/` 外的路径回退到 `/index.html`：未知路径交给前端 404 页，静态文件仍优先命中，不影响路由外壳 |
+| `headers` | `assets/*` 强缓存一年（`immutable`），`img/*` 一周；HTML 保持 `must-revalidate`，发版即生效 |
+
+两个容易踩的坑：
+
+- **Deployment Protection 默认开启**，`.vercel.app` 域名会要求登录 Vercel，客户打不开。已通过 `vercel project protection disable ostra-store --sso` 关闭；新建项目时记得检查。
+- **域名别名**：`https://ostra-store.vercel.app` 指向最新生产部署，可直接分发；每次部署还会生成一个带 hash 的预览地址，不要拿去给客户。
 
 ---
 

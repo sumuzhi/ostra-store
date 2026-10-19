@@ -7,3 +7,5 @@ build/
 .workbuddy/
 .env
 .env.local
+.vercel
+.env*
